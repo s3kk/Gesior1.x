@@ -13,7 +13,7 @@ input.bt{padding:3px 20px;cursor:pointer;}
 <script type="text/javascript">
 function _delete(id)
 {
-	if( confirm('Confirma a exclusão do item selecionado?') )
+	if( confirm('Do you really wanna delete this offer?') )
 	{
 		location.href='?subtopic=shopadmin&action=delete&id=' + id + '';
 	}
@@ -41,20 +41,20 @@ if($group_id_of_acc_logged >= $config['site']['access_admin_panel'])
 		case 'list':
 			$ofertas = $SQL->query('SELECT * FROM '.$SQL->tableName('z_shop_offer').';');
 			
-			$result .= '<p><a href="?subtopic=shopadmin">Shop admin</a> | <a href="?subtopic=shopadmin&action=new">Novo</a> | <a href="?subtopic=shopadmin&action=list">Listar</a> | <a href="?subtopic=shopadmin&action=points">Adicionar pontos</a></p>';
+			$result .= '<p><a href="?subtopic=shopadmin">Shop admin</a> | <a href="?subtopic=shopadmin&action=new">New</a> | <a href="?subtopic=shopadmin&action=list">List</a> | <a href="?subtopic=shopadmin&action=points">Add Points</a></p>';
 			
 			$result .= '<TABLE BGCOLOR="#D4C0A1" BORDER="0" CELLPADDING="4" CELLSPACING="1" WIDTH="100%">';
-			$result .= '<tr bgcolor="#505050"><td class="white"><strong>Items cadastrados no \'Shop Offer\'</strong></td><tr>';
+			$result .= '<tr bgcolor="#505050"><td class="white"><strong>Created offers</strong></td><tr>';
 			
 				$result .= '<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="1" WIDTH="100%">';
-				$result .= '<TR BGCOLOR="#F1E0C6"><td><strong>ID</strong></td><td><strong>Nome da oferta</strong></td><td><strong>Imagem</strong></td><td><strong>Ações</strong></td></TR>';
+				$result .= '<TR BGCOLOR="#F1E0C6"><td><strong>ID</strong></td><td><strong>Offer Name</strong></td><td><strong>Image</strong></td><td><strong>Actions</strong></td></TR>';
 				while($data = $ofertas->fetch())
 				{
 					$result .= '<tr BGCOLOR="#F1E0C6">';
 					$result .= '<td>'.$data['id'].'</td>';
 					$result .= '<td>'.$data['offer_name'].'</td>';
                                         $result .= '<td align="center"><img src="./images/items/'.$data['itemid1'].$config['site']['item_images_extension'].'" /></td>';
-                                        $result .= '<td><a href="?subtopic=shopadmin&action=edit&id='.$data['id'].'">[editar]</a>&nbsp;<a href="javascript:void( _delete('.$data['id'].') );">[excluir]</a></td>';
+                                        $result .= '<td><a href="?subtopic=shopadmin&action=edit&id='.$data['id'].'">[edit]</a>&nbsp;<a href="javascript:void( _delete('.$data['id'].') );">[delete]</a></td>';
 					$result .= '</tr>';
 				}
 				$result .= '</table>';
@@ -65,7 +65,7 @@ if($group_id_of_acc_logged >= $config['site']['access_admin_panel'])
 			break; //lista as ofertas
 		
 		case 'edit':
-			$main_content .= '<p><a href="?subtopic=shopadmin">Shop admin</a> | <a href="?subtopic=shopadmin&action=new">Novo</a> | <a href="?subtopic=shopadmin&action=list">Listar</a> | <a href="?subtopic=shopadmin&action=points">Adicionar pontos</a></p>';
+			$main_content .= '<p><a href="?subtopic=shopadmin">Shop admin</a> | <a href="?subtopic=shopadmin&action=new">New</a> | <a href="?subtopic=shopadmin&action=list">List</a> | <a href="?subtopic=shopadmin&action=points">Add Points</a></p>';
 			$id = is_numeric($_GET['id']) ? $_GET['id'] : header('Location: ?subtopic=shopadmin');
 			$dados = $SQL->query('SELECT * FROM '.$SQL->tableName('z_shop_offer').' WHERE id='.$id)->fetch();
 			
@@ -83,10 +83,10 @@ if($group_id_of_acc_logged >= $config['site']['access_admin_panel'])
 			}
 			
 			$main_content .= <<<EOD
-				<h1 class="admshop"><strong>Editar/Atualizar oferta</strong></h1>
+				<h1 class="admshop"><strong>Edit/Update offer</strong></h1>
 				<form method="post" action="?subtopic=shopadmin&action=shop_edit">
 					<input type="hidden" name="id_offer" value="{$dados['id']}" />
-					<p class="border"><strong>Nome / Descrição da oferta</strong></p>
+					<p class="border"><strong>Name / Offer description</strong></p>
 					<p><label class="admshop">Oferta: </label><input type="text" name="offer_name" size="50" maxlength="100" value="{$dados['offer_name']}" /></p>
 					<p><label class="admshop">Descrição: </label><input type="text" name="offer_description" size="50" maxlength="1000" value="{$dados['offer_description']}" /></p>
 					<p><label class="admshop">Qtde. pontos: </label><input type="text" name="points" size="5" maxlength="9" value="{$dados['points']}" /></p>
@@ -103,7 +103,7 @@ if($group_id_of_acc_logged >= $config['site']['access_admin_panel'])
 					<p><label class="admshop">Qtde. Item 2: </label><input type="text" name="count2" size="10" value="{$dados['count2']}" /></p>
 					
 					<p class="border"><br /></p>
-					<input type="submit" value="Salvar edição" class="bt" />
+					<input type="submit" value="Save Edition" class="bt" />
 				</form>
 				<div class="clear"></div>
 EOD;
@@ -115,16 +115,16 @@ EOD;
 		case 'points':
 			$main_content .= $items_menu;
 			$main_content .= <<<EOD
-				<h1 class="admshop"><strong>Adicionar pontos à um Character <small><i>(Char)</i></small></strong></h1>
+				<h1 class="admshop"><strong>Add points to some Player<small></small></strong></h1>
 				<form method="post" action="?subtopic=shopadmin&action=points_add">
-					<p class="border"><strong>Entre com o nome do Char</strong></p>
-					<p><label class="admshop">Character <small><i>(Char)</i></small>: </label><input type="text" name="char_name" size="30" maxlength="50" /></p>
+					<p class="border"><strong>Player's name:</strong></p>
+					<p><label class="admshop">Player:</label><input type="text" name="char_name" size="30" maxlength="50" /></p>
 
-					<p class="border"><strong>Entre a quantidade de pontos</strong></p>
-					<p><label class="admshop">Qtde. pontos: </label><input type="text" name="char_points" size="5" maxlength="9" /></p>
+					<p class="border"><strong>Points Amount</strong></p>
+					<p><label class="admshop">Points:</label><input type="text" name="char_points" size="5" maxlength="9" /></p>
 
 					<p class="border"><br /></p>
-					<input type="submit" value="Salvar" class="bt" />
+					<input type="submit" value="Save" class="bt" />
 				</form>
 				<div class="clear"></div>
 EOD;
@@ -139,14 +139,14 @@ case 'points_add':
 
 				if($data['account_id']){
 					$SQL->query("UPDATE `accounts` SET `premium_points` = `premium_points` + '".$points."' WHERE `id` = '".$data['account_id']."'");
-					$main_content .= '<strong class="success">Pontos adicionados com sucesso à: <i>'.$player.'</i></strong><br /><br /><a href="?subtopic=shopadmin">Voltar</a>';
+					$main_content .= '<strong class="success">Pontos adicionados com sucesso à: <i>'.$player.'</i></strong><br /><br /><a href="?subtopic=shopadmin">Back</a>';
 				}else{
-					$main_content .= '<strong class="error">O character indicado não existe.</strong><br /><br /><a href="?subtopic=shopadmin&action=points">Voltar</a>';
+					$main_content .= '<strong class="error">O character indicado não existe.</strong><br /><br /><a href="?subtopic=shopadmin&action=points">Back</a>';
 				}
 
 				
 			}else{
-				$main_content .= '<strong class="error">Preencha o nome do Character.</strong><br /><br /><a href="?subtopic=shopadmin&action=points">Voltar</a>';
+				$main_content .= '<strong class="error">Write the character name.</strong><br /><br /><a href="?subtopic=shopadmin&action=points">Back</a>';
 			}			
 			break;
 			
@@ -162,7 +162,7 @@ case 'points_add':
 			$offer_name			= trim($_POST['offer_name']);
 			
 			if(empty($points) && empty($itemid1) && empty($offer_name)) {
-				$main_content .= '<strong class="error">Você deve preencher pelo menos os pontos, id item 1 e o nome da oferta!</strong><p><hr /></p><a href="javascript:void(history.go(-1));">Voltar</a>';
+				$main_content .= '<strong class="error">Você deve preencher pelo menos os pontos, id item 1 e o nome da oferta!</strong><p><hr /></p><a href="javascript:void(history.go(-1));">Back</a>';
 			} else {
 				$sql_edit = sprintf(
 					"UPDATE {$SQL->tableName('z_shop_offer')} SET points=%s, itemid1=%s, count1=%s, itemid2=%s, count2=%s, offer_type='%s', offer_description='%s', offer_name='%s' WHERE id=%s",
@@ -177,7 +177,7 @@ case 'points_add':
 					$id
 				);
 				$SQL->query($sql_edit);
-				$main_content .= '<strong class="success">Oferta editada com sucesso!</strong><br /><br /><a href="?subtopic=shopadmin&action=list">Voltar</a>';
+				$main_content .= '<strong class="success">Oferta editada com sucesso!</strong><br /><br /><a href="?subtopic=shopadmin&action=list">Back</a>';
 			}
 			break;
 		
@@ -198,7 +198,7 @@ case 'points_add':
 			$offer_name			= trim($_POST['offer_name']);
 			
 			if(empty($points) && empty($itemid1) && empty($offer_name)) {
-				$main_content .= '<strong class="error">Você deve preencher pelo menos os pontos, id item 1 e o nome da oferta!</strong><p><hr /></p><a href="javascript:void(history.go(-1))">Voltar</a>';
+				$main_content .= '<strong class="error">Você deve preencher pelo menos os pontos, id item 1 e o nome da oferta!</strong><p><hr /></p><a href="javascript:void(history.go(-1))">Back</a>';
 			} else {
 				$sql_save = sprintf(
 					"INSERT INTO `z_shop_offer` (points,itemid1,count1,itemid2,count2,offer_type,offer_description,offer_name)VALUES('%s','%s','%s','%s','%s','%s','%s','%s')",
@@ -212,33 +212,28 @@ case 'points_add':
 					$offer_name
 				);
 				$SQL->query($sql_save);
-				$main_content .= '<strong class="success">Oferta salva com sucesso!</strong><br /><br /><a href="?subtopic=shopadmin">Voltar</a>';
+				$main_content .= '<strong class="success">Oferta salva com sucesso!</strong><br /><br /><a href="?subtopic=shopadmin">Back</a>';
 			}
 			break; //salva a oferta no banco de dados
 			
 		case 'new':
-			$main_content .= '<p><a href="?subtopic=shopadmin">Shop admin</a> | <a href="?subtopic=shopadmin&action=new">Novo</a> | <a href="?subtopic=shopadmin&action=list">Listar</a> | <a href="?subtopic=shopadmin&action=points">Adicionar pontos</a></p>';
+			$main_content .= '<p><a href="?subtopic=shopadmin">Shop admin</a> | <a href="?subtopic=shopadmin&action=new">New</a> | <a href="?subtopic=shopadmin&action=list">List</a> | <a href="?subtopic=shopadmin&action=points">Add Points</a></p>';
 			$main_content .= <<<EOD
-				<h1 class="admshop"><strong>Cadastrar nova oferta</strong></h1>
+				<h1 class="admshop"><strong>Create new Offer</strong></h1>
 				<form method="post" action="?subtopic=shopadmin&action=shop_save">
-					<p class="border"><strong>Nome / Descrição da oferta</strong></p>
-					<p><label class="admshop">Oferta: </label><input type="text" name="offer_name" size="50" maxlength="100" /></p>
-					<p><label class="admshop">Descrição: </label><input type="text" name="offer_description" size="50" maxlength="1000" /></p>
-					<p><label class="admshop">Qtde. pontos: </label><input type="text" name="points" size="5" maxlength="9" /></p>
+					<p class="border"><strong>Name / Offer description</strong></p>
+					<p><label class="admshop">Offer: </label><input type="text" name="offer_name" size="50" maxlength="100" /></p>
+					<p><label class="admshop">Description: </label><input type="text" name="offer_description" size="50" maxlength="1000" /></p>
+					<p><label class="admshop">Points Amount: </label><input type="text" name="points" size="5" maxlength="9" /></p>
 					
-					<p class="border"><strong>Tipo da oferta</strong></p>
-					<p><label class="admshop">Tipo: </label><select name="offer_type"><option value="item" selected="selected">Item</option><option value="mount">Mounts</option><option value="addon">Addons</option></select></p>
+					<p class="border"><strong>Offer Type</strong></p>
+					<p><label class="admshop">Type: </label><select name="offer_type"><option value="item" selected="selected">Item</option><option value="mount">Mounts</option><option value="addon">Addons</option></select></p>
 					
-					<p class="border"><strong>Configuração de item normal, armor, shield, legs, etc</strong></p>
-					<p><label class="admshop">ID Item 1: </label><input type="text" name="itemid1" size="10" /></p>
-					<p><label class="admshop">Qtde. Item 1: </label><input type="text" name="count1" size="10" /></p>
-					
-					<p class="border"><strong>Configuração de item mounts, BP com Runas, BP com Small Stones, etc</strong></p>
-					<p><label class="admshop">ID Item 2: </label><input type="text" name="itemid2" size="10" /></p>
-					<p><label class="admshop">Qtde. Item 2: </label><input type="text" name="count2" size="10" /></p>
-					
+					<p class="border"><strong>Configuring the Offer</strong></p>
+					<p><label class="admshop">ID of the product: </label><input type="text" name="itemid1" size="10" /></p>
+					<p><label class="admshop">Offer amount: </label><input type="text" name="count1" size="10" /></p>
 					<p class="border"><br /></p>
-					<input type="submit" value="Salvar" class="bt" />
+					<input type="submit" value="Save" class="bt" />
 				</form>
 				<div class="clear"></div>
 EOD;
@@ -249,9 +244,9 @@ EOD;
 				<h1 class="admshop"><strong>Bem vindo ao Administrador do Shop!</strong></h1>
 				<hr />
 				<center>
-					<button type="button" class="bt2" onclick="location.href='?subtopic=shopadmin&action=new'">Novo</button>
-					<button type="button" class="bt2" onclick="location.href='?subtopic=shopadmin&action=list'">Listar</button>
-					<button type="button" class="bt2" onclick="location.href='?subtopic=shopadmin&action=points'">Adicionar Points</button>
+					<button type="button" class="bt2" onclick="location.href='?subtopic=shopadmin&action=new'">New</button>
+					<button type="button" class="bt2" onclick="location.href='?subtopic=shopadmin&action=list'">List</button>
+					<button type="button" class="bt2" onclick="location.href='?subtopic=shopadmin&action=points'">Add Points</button>
 				</center>
 EOD;
 #/\ Deixe assim !!!
@@ -264,3 +259,9 @@ else
 {
 	$main_content .= 'Sorry, you have not the rights to access this page.';
 }
+
+/******************************************************************
+* SYSTEMA DE ADMINISTRAÇÃO ONLINE DO WEBSHOP GESIOR 2012 BY DEZON *
+*    TODOS OS DIREITOS, POR FAVOR, NÃO REMOVER ESSES CRÉDITOS     *
+*       FEITO EXCLUSIVAMENTE PARA O SITE WWW.TIBIAKING.COM        *
+******************************************************************/
