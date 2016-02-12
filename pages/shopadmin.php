@@ -264,9 +264,3 @@ else
 {
 	$main_content .= 'Sorry, you have not the rights to access this page.';
 }
-
-/******************************************************************
-* SYSTEMA DE ADMINISTRAÇÃO ONLINE DO WEBSHOP GESIOR 2012 BY DEZON *
-*    TODOS OS DIREITOS, POR FAVOR, NÃO REMOVER ESSES CRÉDITOS     *
-*       FEITO EXCLUSIVAMENTE PARA O SITE WWW.TIBIAKING.COM        *
-******************************************************************/
