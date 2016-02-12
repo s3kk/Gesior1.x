@@ -8,9 +8,9 @@ include("status.php");
 <html ng-app>
 <head>
 <meta charset="utf-8">
-<title>Liane OTs</title>
+<title>Forgotten Server</title>
 <meta name="description" content="Tibia is a free massively multiplayer online role-playing game (MMORPG)">
-<meta name="author" content="Liane">
+<meta name="author" content="Sekk">
 <meta http-equiv="content-language" content="en">
 <meta name="keywords" content="free online rpg, free mmorpg, mmorpg, mmog, online role playing game, online multiplayer game, internet game, online rpg, rpg">
 <!--ICON-->
@@ -157,14 +157,6 @@ var FB_ForceReload = 0;
     								<div class="LeftChain" style="background-image:url(<?PHP echo $layout_name; ?>/images/general/chain.gif);"></div>
 									<div id="ActiveSubmenuItemIcon_archive" class="ActiveSubmenuItemIcon" style="background-image:url(<?PHP echo $layout_name; ?>/images/menu/icon-activesubmenu.gif);"></div>
 									<div id="ActiveSubmenuItemLabel_archive" class="SubmenuitemLabel">News Archive</div>
-									<div class="RightChain" style="background-image:url(<?PHP echo $layout_name; ?>/images/general/chain.gif);"></div>
-  								</div>
-							</a>
-                                                         <a href="?subtopic=compreaqui">
-  								<div id="submenu_compreaqui" class="Submenuitem" onmouseover="MouseOverSubmenuItem(this)" onmouseout="MouseOutSubmenuItem(this)">
-    								<div class="LeftChain" style="background-image:url(<?PHP echo $layout_name; ?>/images/general/chain.gif);"></div>
-									<div id="ActiveSubmenuItemIcon_compreaqui" class="ActiveSubmenuItemIcon" style="background-image:url(<?PHP echo $layout_name; ?>/images/menu/icon-activesubmenu.gif);"></div>
-									<div id="ActiveSubmenuItemLabel_compreaqui" class="SubmenuitemLabel">Compre Aqui</div>
 									<div class="RightChain" style="background-image:url(<?PHP echo $layout_name; ?>/images/general/chain.gif);"></div>
   								</div>
 							</a>
