@@ -20,12 +20,12 @@ http://hastebin.com/raw/fomohogojo
 #2. But not less important, follow these steps to create an Addon or Mount offer in the Website Shop:
 
   * Offer - Choose your offer's name
-  ** Description - Describe your offer
-  ** Points - Price of the offer
+  * Description - Describe your offer
+  * Points - Price of the offer
 
   * Offer Type:
-  ** Type - choose beetween 'Item', 'Addons' and 'Mounts'
+  * Type - choose beetween 'Item', 'Addons' and 'Mounts'
 
   * Configuring the Offer:
-  ** ID of the product -- Here, choose the ID of the Item, but, if the offer is an Addon ou Mount, you must type the 'storage' that was quoted before into creaturescripts/scripts/addonmount.lua
-  ** Amount - Normally is 1, here is the amount of items/addons/mounts the offer delivers to the player
+  * ID of the product -- Here, choose the ID of the Item, but, if the offer is an Addon ou Mount, you must type the 'storage' that was quoted before into creaturescripts/scripts/addonmount.lua
+  * Amount - Normally is 1, here is the amount of items/addons/mounts the offer delivers to the player
