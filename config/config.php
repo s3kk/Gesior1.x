@@ -1,10 +1,9 @@
 ﻿<?PHP
 $config['site']['worlds'] = array(0 => 'Forgotten Server'); #! NOME DO SERVIDOR !#
 # Account Maker Config
-$config['site']['serverPath'] = "/";
+$config['site']['serverPath'] = "C:/Users/Casarin/Desktop/Eu/Tibia/New/Master/";
 $config['site']['useServerConfigCache'] = false;
-$towns_list = array(1 => 'Venore',
-2 => 'Farmine');
+$towns_list = array(1 => 'Forgotten Town');
 
 $config['site']['outfit_images_url'] = 'http://outfit-images.ots.me/outfit.php';
 $config['site']['addons_images_url'] = 'images/addons/';

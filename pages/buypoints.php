@@ -8,17 +8,17 @@ else
 {
 $main_content .= '<table width="100%" border="0" cellpadding="4" cellspacing="1">
 <tbody><tr>
- <td class="white" colspan="3" bgcolor="#505050"><span class="style4">Detalhes da bonifica&ccedil;&atilde;o de Points.</span></td>
+ <td class="white" colspan="3" bgcolor="#505050"><span class="style4">Details of the prices.</span></td>
 
 </tr>
-<tr bgcolor="#f1e0c6"><td width="35%"><b>Doa&ccedil;&atilde;o</b></td><td width="35%"><b>Points</b></td></tr>
+<tr bgcolor="#f1e0c6"><td width="35%"><b>Donate</b></td><td width="35%"><b>Points</b></td></tr>
 <tr bgcolor="#d4c0a1"><td>R$5,00</td><td><img src="layouts/tibiarl/images/content/bullet.gif"> 5 Points</td></tr>
 
 <tr bgcolor="#f1e0c6"><td>R$10,00</td><td><img src="layouts/tibiarl/images/content/bullet.gif"> 10 Points</td></tr>
 <tr bgcolor="#d4c0a1"><td>R$20,00</td><td><img src="layouts/tibiarl/images/content/bullet.gif"> 20 Points</td></tr>
 <tr bgcolor="#f1e0c6"><td>R$40,00</td><td><img src="layouts/tibiarl/images/content/bullet.gif"> 40 Points</td></tr>
 <tr bgcolor="#d4c0a1"><td>R$60,00</td><td><img src="layouts/tibiarl/images/content/bullet.gif"> 60 Points</td></tr>
-<tr bgcolor="#f1e0c6"><td><center><img src="layouts/tibiarl/images/content/bullet.gif"> E assim por diante!!! <img src="layouts/tibiarl/images/content/bullet.gif"></center><td><center><img src="layouts/tibiarl/images/content/bullet.gif"> E assim por diante!!! <img src="layouts/tibiarl/images/content/bullet.gif"></center></td></tr>
+<tr bgcolor="#f1e0c6"><td><center><img src="layouts/tibiarl/images/content/bullet.gif">And so on...<img src="layouts/tibiarl/images/content/bullet.gif"></center><td><center><img src="layouts/tibiarl/images/content/bullet.gif">And so on...<img src="layouts/tibiarl/images/content/bullet.gif"></center></td></tr>
 </tbody></table></br>
 ';
 $main_content .= '
@@ -33,14 +33,14 @@ $main_content .= '
 <input type="hidden" name="ref_transacao" value="'.$account_logged->getCustomField("name").'">
 <table border="0" cellpadding="4" cellspacing="1" width="100%" id="#estilo"><tbody>
 <tr bgcolor="#505050" class="white">
-<th colspan="2"><strong>Escolha a quantidade de pontos que deseja DONATAR.</strong></th>
+<th colspan="2"><strong>Choose the Points amount to buy.</strong></th>
 </tr>
 <tr bgcolor="#d4c0a1">
-<td width="10%">Sua conta</td>
+<td width="10%">Your account:</td>
 <td><strong>'.$account_logged->getCustomField("name").'</strong></td>
 </tr>
 <tr bgcolor="#d4c0a1">
-<td width="10%">Pontos</td>
+<td width="10%">Points:</td>
 <td>
 <input type="number" ng-model="get_points" min="1" size="5" maxlength="5">
 <input name="item_valor_1" type="hidden" value="{{get_points * 100}}" size="5" maxlength="5">
@@ -49,9 +49,8 @@ $main_content .= '
 </tr>
 <tr bgcolor="#d4c0a1">
 <td colspan="2">
-<input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/carrinhoproprio/btnFinalizar.jpg" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+<input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/carrinhoproprio/btnFinalizar.jpg" name="submit"/>
 </td>
 </tr>
 </tbody></table></form>
-<b><span style="color:#ff0000;">OBS:</span></b> Os pontos são entregues <b>automáticamente</b> logo após a <u>aprovação</u> do seu pagamento pelo PagSeguro, ou seja, pagou e foi aprovado pontos depositados.
 <?php } ?>'; } ?>
