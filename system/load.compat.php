@@ -49,8 +49,11 @@ $title = ucwords($subtopic) . ' - ' . Website::getServerConfig()->getValue('serv
 $topic = $subtopic;
 
 $passwordency = Website::getServerConfig()->getValue('passwordType');
-if($passwordency == 'plain')
+if (empty($passwordency)) {
+	$passwordency = 'sha1';
+} else if ($passwordency == 'plain') {
 	$passwordency = '';
+}
 
 $news_content = '';
 $vocation_name = array();
@@ -251,7 +254,7 @@ if(!ONLY_PAGE)
 	{
 		$config['status']['serverStatus_checkInterval'] = $statustimeout+3;
 		$config['status']['serverStatus_lastCheck'] = time();
-		$statusInfo = new ServerStatus($config['server']['ip'], $config['server']['statusPort'], 1);
+		$statusInfo = new ServerStatus($config['server']['ip'], $config['server']['statusProtocolPort'], 1);
 		if($statusInfo->isOnline())
 		{
 			$config['status']['serverStatus_online'] = 1;

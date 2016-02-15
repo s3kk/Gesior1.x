@@ -172,11 +172,10 @@ function showPost($topic, $text, $smile)
               </div>
             </div>
             <table style="clear:both" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody>
-            <tr>'.showPost('', $thread['post_text'], $thread['post_smile']).'</tr><br><h5><i>Posted by </i><font color="green">'.$thread['name'].'</font></h5><tr><td><div style="text-align:right;margin:10px 10px 0 0;"><a href="?subtopic=forum&action=show_thread&id=' . $thread['id'] . '">» Comment on this news</a></div></td></tr></tbody>
+            <tr>'.showPost('', $thread['post_text'], $thread['post_smile']).'</tr><tr><td><div style="text-align:right;margin:10px 10px 0 0;"><a href="?subtopic=forum&action=show_thread&id=' . $thread['id'] . '">» Comment on this news</a></div></td></tr></tbody>
             </table>
             <br>';
         }
     }
     else
         $main_content .= '<h3>No news. Go forum and make new thread on board News.</h3>';
-?>

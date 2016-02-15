@@ -1,9 +1,9 @@
-﻿<?PHP
-$config['site']['worlds'] = array(0 => 'Forgotten Server'); #! NOME DO SERVIDOR !#
+<?PHP
 # Account Maker Config
-$config['site']['serverPath'] = "C:/Users/Casarin/Desktop/Eu/Tibia/New/Master/";
+$config['site']['serverPath'] = "/";
 $config['site']['useServerConfigCache'] = false;
-$towns_list = array(1 => 'Forgotten Town');
+$config['site']['server_name'] = 'Forgotten';
+$towns_list = array(2 => 'Thais', 1 => 'Venore', 4 => 'Carlin');
 
 $config['site']['outfit_images_url'] = 'http://outfit-images.ots.me/outfit.php';
 $config['site']['addons_images_url'] = 'images/addons/';
@@ -12,32 +12,33 @@ $config['site']['mounts_images_url'] = 'images/mounts/';
 $config['site']['mounts_images_extension'] = '.gif';
 $config['site']['item_images_url'] = 'images/items/';
 $config['site']['item_images_extension'] = '.gif';
-$config['site']['flag_images_url'] = 'images';
+$config['site']['flag_images_url'] = 'images/flags/';
 $config['site']['flag_images_extension'] = '.png';
+$config['site']['encryptionType'] = 'sha1';
 
 # Create Account Options
 $config['site']['one_email'] = false;
 $config['site']['create_account_verify_mail'] = false;
-$config['site']['verify_code'] = false;
+$config['site']['verify_code'] = true;
 $config['site']['email_days_to_change'] = 3;
-$config['site']['newaccount_premdays'] = 3;
+$config['site']['newaccount_premdays'] = 999;
 $config['site']['send_register_email'] = false;
+$config['site']['select_flag'] = true;
 
 # Create Character Options
 $config['site']['newchar_vocations'] = array(1 => 'Sorcerer Sample', 2 => 'Druid Sample', 3 => 'Paladin Sample', 4 => 'Knight Sample');
-$config['site']['newchar_towns'] = array(1);
-$config['site']['max_players_per_account'] = 10;
-
+$config['site']['newchar_towns'] = array(2);
+$config['site']['max_players_per_account'] = 7;
 
 # Emails Config
 $config['site']['send_emails'] = false;
-$config['site']['mail_address'] = "@gmx.com";
-$config['site']['smtp_enabled'] = false;
+$config['site']['mail_address'] = "xxxx@gmx.com";
+$config['site']['smtp_enabled'] = true;
 $config['site']['smtp_host'] = "mail.gmx.com";
-$config['site']['smtp_port'] = 465;
+$config['site']['smtp_port'] = 25;
 $config['site']['smtp_auth'] = false;
-$config['site']['smtp_user'] = "";
-$config['site']['smtp_pass'] = "";
+$config['site']['smtp_user'] = "xxx@gmx.com";
+$config['site']['smtp_pass'] = "xxxx";
 
 # PAGE: whoisonline.php
 $config['site']['private-servlist.com_server_id'] = 0;
@@ -55,14 +56,14 @@ $config['site']['show_vip_storage'] = 0;
 # PAGE: accountmanagement.php
 $config['site']['send_mail_when_change_password'] = true;
 $config['site']['send_mail_when_generate_reckey'] = true;
-$config['site']['generate_new_reckey'] = true;
-$config['site']['generate_new_reckey_price'] = 20;
+$config['site']['generate_new_reckey'] = false;
+$config['site']['generate_new_reckey_price'] = 500;
 
 # PAGE: guilds.php
-$config['site']['guild_need_level'] = 60;
+$config['site']['guild_need_level'] = 15;
 $config['site']['guild_need_pacc'] = false;
 $config['site']['guild_image_size_kb'] = 50;
-$config['site']['guild_description_chars_limit'] = 250;
+$config['site']['guild_description_chars_limit'] = 2000;
 $config['site']['guild_description_lines_limit'] = 6;
 $config['site']['guild_motd_chars_limit'] = 250;
 
@@ -73,13 +74,13 @@ $config['site']['access_admin_panel'] = 3;
 $config['site']['news_limit'] = 6;
 
 # PAGE: killstatistics.php
-$config['site']['last_deaths_limit'] = 50;
+$config['site']['last_deaths_limit'] = 40;
 
 # PAGE: team.php
 $config['site']['groups_support'] = array(2, 3, 4, 5, 6);
 
 # PAGE: highscores.php
-$config['site']['groups_hidden'] = array(2, 3, 4, 5);
+$config['site']['groups_hidden'] = array(4, 5, 6);
 $config['site']['accounts_hidden'] = array(1);
 
 # PAGE: shopsystem.php
@@ -89,33 +90,9 @@ $config['site']['shop_system'] = true;
 $config['site']['email_lai_sec_interval'] = 180;
 
 # Layout Config
-$config['site']['layout'] = 'tibiarl';
+$config['site']['layout'] = 'tibiacom';
 $config['site']['vdarkborder'] = '#505050';
 $config['site']['darkborder'] = '#D4C0A1';
 $config['site']['lightborder'] = '#F1E0C6';
-$config['site']['download_page'] = true;
+$config['site']['download_page'] = false;
 $config['site']['serverinfo_page'] = true;
-
-############################
-## PagSeguro/Paypal Email ##
-############################
-#PAGSEGURO SISTEMA AUTOMATICO
-$config['pagseguro']['email'] = 'seuemail@algumacoisa.com'; //E-mail da sua conta PagSeguro
-$config['pagseguro']['produtoNome'] = 'Premium Points'; //Identificação do Pontos
-$config['pagseguro']['produtoValor'] = '100'; //100 = R$ 1,00 - 250 = R$ 2,50
-
-#####################
-## Nome do Produto ##
-#####################
-$config['pagseguro']['produtoNome'] = 'Premium Points';
-
-#############################
-######### C A I X A ########
-#############################
-#! Informações do pagamento com caixa economica federal !#
-$config['site']['CaixaCont'] = "
-Conta/Corrente: NUMERO
-Ag: NUMERO
-Favorecido: NOME
-OP: NUMERO
-"; 

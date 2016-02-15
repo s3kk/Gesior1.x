@@ -120,7 +120,7 @@ EOD;
 					<p class="border"><strong>Player's name:</strong></p>
 					<p><label class="admshop">Player:</label><input type="text" name="char_name" size="30" maxlength="50" /></p>
 
-					<p class="border"><strong>Points Amount</strong></p>
+					<p class="border"><strong>Points amount</strong></p>
 					<p><label class="admshop">Points:</label><input type="text" name="char_points" size="5" maxlength="9" /></p>
 
 					<p class="border"><br /></p>
@@ -224,13 +224,13 @@ case 'points_add':
 					<p class="border"><strong>Name / Offer description</strong></p>
 					<p><label class="admshop">Offer: </label><input type="text" name="offer_name" size="50" maxlength="100" /></p>
 					<p><label class="admshop">Description: </label><input type="text" name="offer_description" size="50" maxlength="1000" /></p>
-					<p><label class="admshop">Points Amount: </label><input type="text" name="points" size="5" maxlength="9" /></p>
+					<p><label class="admshop">Points amount: </label><input type="text" name="points" size="5" maxlength="9" /></p>
 					
 					<p class="border"><strong>Offer Type</strong></p>
 					<p><label class="admshop">Type: </label><select name="offer_type"><option value="item" selected="selected">Item</option><option value="mount">Mounts</option><option value="addon">Addons</option></select></p>
 					
 					<p class="border"><strong>Configuring the Offer</strong></p>
-					<p><label class="admshop">ID of the product: </label><input type="text" name="itemid1" size="10" /></p>
+					<p><label class="admshop">Product ID: </label><input type="text" name="itemid1" size="10" /></p>
 					<p><label class="admshop">Offer amount: </label><input type="text" name="count1" size="10" /></p>
 					<p class="border"><br /></p>
 					<input type="submit" value="Save" class="bt" />

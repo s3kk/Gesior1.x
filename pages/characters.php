@@ -21,11 +21,12 @@ if(!empty($name))
 			$skull = "<img style='border: 0;' src='./images/skulls/blackskull.gif'/>";
 		$main_content .= '<table border="0" cellspacing="1" cellpadding="4" width="100%"><tr bgcolor="'.$config['site']['vdarkborder'].'"><td colspan="2" style="font-weight:bold;color:white">Character Information</td></tr>';
 		$bgcolor = (($number_of_rows++ % 2 == 1) ?  $config['site']['darkborder'] : $config['site']['lightborder']);
-		$main_content .= '<tr bgcolor="' . $bgcolor . '"><td width="20%">Name:</td><td style="font-weight:bold;color:' . (($player->isOnline()) ? 'green' : 'red') . '">' . htmlspecialchars($player->getName()) . '';
+		$main_content .= '<tr bgcolor="' . $bgcolor . '"><td width="20%">Name:</td><td style="font-weight:bold;color:' . (($player->isOnline()) ? 'green' : 'red') . '">' . htmlspecialchars($player->getName()) . ' ' . $skull . ' <img src="' . $config['site']['flag_images_url'] . $account->getFlag() . $config['site']['flag_images_extension'] . '" title="Country: ' . $account->getFlag() . '" alt="' . $account->getFlag() . '" />';
 		if($player->isBanned() || $account->isBanned())
 			$main_content .= '<span style="color:red">[BANNED]</span>';
 		if($player->isNamelocked())
 			$main_content .= '<span style="color:red">[NAMELOCKED]</span>';
+		$main_content .= '<br /><img src="' . $config['site']['outfit_images_url'] . '?id=' . $player->getLookType() . '&addons=' . $player->getLookAddons() . '&head=' . $player->getLookHead() . '&body=' . $player->getLookBody() . '&legs=' . $player->getLookLegs() . '&feet=' . $player->getLookFeet() . '" alt="" /></td></tr>';
 
 		if(in_array($player->getGroup(), $config['site']['groups_support']))
 		{
@@ -72,6 +73,128 @@ if(!empty($name))
 			$main_content .= '<tr bgcolor="' . $bgcolor . '"><td>Comment:</td><td>' . $comment . '</td></tr>';
 		}
 		$main_content .= '</TABLE>';
+
+		$main_content .= '<table width=100%><tr>';
+		$itemsList = $player->getItems();
+		$main_content .= '<td align=center><table with=100% style="border: solid 1px #888888;" CELLSPACING="1"><TR>';		
+		$list = array('2','1','3','6','4','5','9','7','10','8');
+		foreach ($list as $number_of_items_showed => $slot)
+		{
+			if($slot == '8') // add Soul before show 'feet'
+			{
+				$main_content .= '<td style="background-color: '.$config['site']['darkborder'].'; text-align: center;">Soul:<br/>'. $player->getSoul() .'</td>';
+			}
+			if($itemsList->getSlot($slot) === false) // item does not exist in database
+			{
+				$main_content .= '<TD style="background-color: '.$config['site']['darkborder'].';"><img src="' . $config['site']['item_images_url'] . $slot . $config['site']['item_images_extension'] . '" width="45"/></TD>';
+			}
+			else
+			{
+				$main_content .= '<TD style="background-color: '.$config['site']['darkborder'].';"><img src="' . $config['site']['item_images_url'] . $itemsList->getSlot($slot)->getID() . $config['site']['item_images_extension'] . '" width="45"/></TD>';
+			}
+			if($number_of_items_showed % 3 == 2)
+			{
+				$main_content .= '</tr><tr>';
+			}
+			if($slot == '8') // add Capacity after show 'feet'
+			{
+				$main_content .= '<td style="background-color: '.$config['site']['darkborder'].'; text-align: center;">Cap:<br/>'. $player->getCap() .'</td>';
+			}
+		}
+		$main_content .= '</tr></TABLE></td>';
+
+		$hpPercent = max(0, min(100, $player->getHealth() / max(1, $player->getHealthMax()) * 100));
+		$manaPercent = max(0, min(100, $player->getMana() / max(1, $player->getManaMax()) * 100));
+		$main_content .= '<td align=center ><table width=100%><tr><td align=center><table CELLSPACING="1" CELLPADDING="4" width="100%"><tr><td BGCOLOR="'.$config['site']['lightborder'].'" align="left" width="20%"><b>Player Health:</b></td>
+		<td BGCOLOR="'.$config['site']['lightborder'].'" align="left">'.$player->getHealth().'/'.$player->getHealthMax().'<div style="width: 100%; height: 3px; border: 1px solid #000;"><div style="background: red; width: ' . $hpPercent . '%; height: 3px;"></td></tr>
+		<tr><td BGCOLOR="'.$config['site']['darkborder'].'" align="left"><b>Player Mana:</b></td><td BGCOLOR="'.$config['site']['darkborder'].'" align="left">' . $player->getMana() . '/' . $player->getManaMax() . '<div style="width: 100%; height: 3px; border: 1px solid #000;"><div style="background: blue; width: '.$manaPercent.'%; height: 3px;"></td></tr></table><tr>';
+
+		$expCurrent = Functions::getExpForLevel($player->getLevel());
+		$expNext = Functions::getExpForLevel($player->getLevel() + 1);
+		$expLeft = bcsub($expNext, $player->getExperience(), 0);
+
+
+		$expLeftPercent = max(0, min(100, ($player->getExperience() - $expCurrent) / ($expNext - $expCurrent) * 100));
+		$main_content .= '<tr><table CELLSPACING="1" CELLPADDING="4"><tr><td BGCOLOR="'.$config['site']['lightborder'].'" align="left" width="20%"><b>Player Level:</b></td><td BGCOLOR="'.$config['site']['lightborder'].'" align="left">'.$player->getLevel().'</td></tr>
+		<tr><td BGCOLOR="'.$config['site']['darkborder'].'" align="left"><b>Player Experience:</b></td><td BGCOLOR="'.$config['site']['darkborder'].'" align="left">' . $player->getExperience() . ' EXP.</td></tr>
+		<tr><td BGCOLOR="' . $config['site']['lightborder'].'" align="left"><b>To Next Level:</b></td><td BGCOLOR="'.$config['site']['lightborder'].'" align="left">You need <b>' . $expLeft . ' EXP</b> to Level <b>' . ($player->getLevel() + 1) . '</b>.<div title="' . (100 - $expLeftPercent)  . '% left" style="width: 100%; height: 3px; border: 1px solid #000;"><div style="background: red; width: '.$expLeftPercent.'%; height: 3px;"></td></tr></table></td></tr></table></tr></TABLE></td>';
+
+		if($config['site']['show_skills_info'])
+		{
+			$main_content .= '<center><strong>Skills</strong><table cellspacing="0" cellpadding="0" border="1" width="200">
+				
+				<tbody>
+					<tr>
+						<td style="text-align: center;"><a href="?subtopic=highscores&list=experience"><img src="images/skills/level.gif" alt="" style="border-style: none"/></td>
+						<td style="text-align: center;"><a href="?subtopic=highscores&list=magic"><img src="images/skills/ml.gif" alt="" style="border-style: none"/></td>
+						<td style="text-align: center;"><a href="?subtopic=highscores&list=fist"><img src="images/skills/fist.gif" alt="" style="border-style: none"/></td>
+						<td style="text-align: center;"><a href="?subtopic=highscores&list=club"><img src="images/skills/club.gif" alt="" style="border-style: none"/></td>
+						<td style="text-align: center;"><a href="?subtopic=highscores&list=sword"><img src="images/skills/sword.gif" alt="" style="border-style: none"/></td>
+						<td style="text-align: center;"><a href="?subtopic=highscores&list=axe"><img src="images/skills/axe.gif" alt="" style="border-style: none"/></td>
+						<td style="text-align: center;"><a href="?subtopic=highscores&list=distance"><img src="images/skills/dist.gif" alt="" style="border-style: none"/></td>
+						<td style="text-align: center;"><a href="?subtopic=highscores&list=shield"><img src="images/skills/def.gif" alt="" style="border-style: none"/></td>
+						<td style="text-align: center;"><a href="?subtopic=highscores&list=fishing"><img src="images/skills/fish.gif" alt="" style="border-style: none"/></td>
+					</tr>
+					<tr>
+						<tr bgcolor="' . $config['site']['darkborder'] . '"><td style="text-align: center;"><strong>Level</strong></td>
+						<td style="text-align: center;"><strong>ML</strong></td>
+						<td style="text-align: center;"><strong>Fist</strong></td>
+						<td style="text-align: center;"><strong>Mace</strong></td>
+						<td style="text-align: center;"><strong>Sword</strong></td>
+						<td style="text-align: center;"><strong>Axe</strong></td>
+						<td style="text-align: center;"><strong>Dist</strong></td>
+						<td style="text-align: center;"><strong>Def</strong></td>
+						<td style="text-align: center;"><strong>Fish</strong></td>
+					</tr>
+					<tr>
+						<tr bgcolor="' . $config['site']['lightborder'] . '"><td style="text-align: center;">' . $player->getLevel() . '</td>
+						<td style="text-align: center;">' . $player->getMagLevel().'</td>
+						<td style="text-align: center;">' . $player->getSkill(0) . '</td>
+						<td style="text-align: center;">' . $player->getSkill(1) . '</td>
+						<td style="text-align: center;">' . $player->getSkill(2) . '</td>
+						<td style="text-align: center;">' . $player->getSkill(3) . '</td>
+						<td style="text-align: center;">' . $player->getSkill(4) . '</td>
+						<td style="text-align: center;">' . $player->getSkill(5) . '</td>
+						<td style="text-align: center;">' . $player->getSkill(6) . '</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="text-align: center;">&nbsp;<br />&nbsp;</div></center>';
+		}
+
+		$main_content .= '<center><table cellspacing="0" cellpadding="0" border="1" width="200">
+				<tbody>
+					<tr bgcolor="' . $config['site']['darkborder'] . '">
+						<td style="text-align: center;"><img src="?subtopic=signature&name=' . urlencode($player->getName()) . '" alt="Signature" /></td>
+					</tr>
+					<tr bgcolor="' . $config['site']['lightborder'] . '">
+						<td style="text-align: center;"><b>Link:</b><input type="text" name="" size="100" value="' . htmlspecialchars($config['server']['url'] . '?subtopic=signature&name=' . urlencode($player->getName())) . '" /></td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="text-align: center;">&nbsp;<br />&nbsp;</div></center>';
+
+		if(isset($config['site']['quests']) && is_array($config['site']['quests']) && count($config['site']['quests']) > 0)
+		{
+			$main_content .= '<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=100%><TR BGCOLOR="'.$config['site']['vdarkborder'].'"><TD align="left" COLSPAN=2 CLASS=white><B>Quests</B></TD></TD align="right"></TD></TR>';		
+			$number_of_quests = 0;
+			foreach($config['site']['quests'] as $questName => $storageID)
+			{
+				$bgcolor = (($number_of_rows++ % 2 == 1) ?  $config['site']['darkborder'] : $config['site']['lightborder']);
+				$number_of_quests++;
+				$main_content .= '<TR BGCOLOR="' . $bgcolor . '"><TD WIDTH=95%>' . $questName . '</TD>';
+				if($player->getStorage($storageID) === null)
+				{
+					$main_content .= '<TD><img src="images/false.png"/></TD></TR>';
+				}
+				else
+				{
+					$main_content .= '<TD><img src="images/true.png"/></TD></TR>';
+				}
+			}
+			$main_content .= '</TABLE></td></tr></table><br />';
+		}
+
 		$deads = 0;
 
 		//deaths list
